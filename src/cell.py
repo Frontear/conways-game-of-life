@@ -24,6 +24,21 @@ class Cell(Drawable):
 
     def isAlive(self):
         return self.__alive
+
+    def update(self):
+        if self.__mark_live:
+            self.__mark_live = False
+            self.__alive = True
+
+        if self.__mark_die:
+            self.__mark_die = False
+            self.__alive = False
+
+        if self.__alive and self.image != self.live_image:
+            self.image = self.live_image
+
+        if not self.__alive and self.image != self.die_image:
+            self.image = self.die_image
     
     # TODO: separate into tick() method
     # Rules of Conway:
@@ -51,15 +66,6 @@ class Cell(Drawable):
         else:
             if living_neighbors == 3:
                 self.live()
-
-        if self.__mark_live:
-            self.__alive = True
-            self.__mark_live = False
-            self.image = self.live_image
-        if self.__mark_die:
-            self.__die = True
-            self.__mark_die = False
-            self.image = self.die_image
 
         return ret
 

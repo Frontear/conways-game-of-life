@@ -69,6 +69,10 @@ if __name__ == "__main__":
 
         for row in cells:
             for cell in row:
+                cell.update()
+
+        for row in cells:
+            for cell in row:
                 cell.draw()
 
         pygame.display.flip()
