@@ -1,6 +1,9 @@
 { pkgs ? import <nixpkgs> {} }: pkgs.mkShell {
-    nativeBuildInputs = with pkgs; [
-        python311Full
-        python311Packages.pygame
+    packages = with pkgs; [
+        (python3.withPackages (pip: [
+            (pip.pygame.overrideAttrs {
+                env.PYGAME_DETECT_AVX2 = "y";
+            })
+        ]))
     ];
 }
